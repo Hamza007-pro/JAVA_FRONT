@@ -1,14 +1,19 @@
 import React from 'react';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import './App.css';
-import Header from './components/Header';
-import Body from './components/Body';
+
+import Index from './pages';
+import DataBaseService from './components/services/DataBaseService/DataBaseService';
 function App() {
   return (
-    <div className="bg-white">
-      <Header></Header>
-      <Body></Body>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Index />} />
+        <Route path='home' element={<Index/>}/>
+        <Route path='DataBaseService' element={<DataBaseService/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

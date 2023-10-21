@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import DataBaseService from "../components/services/DataBaseService/DataBaseService";
 import { useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
@@ -74,7 +74,7 @@ function Header() {
                             {solutions.map((item) => (
                               <Link
                                 key={item.name}
-                                to={item.href}
+                                  to={item.href}
                                 className="-m-3 flex flex-col justify-between rounded-lg p-3 hover:bg-gray-50"
                               >
                                 <div className="flex md:h-full lg:flex-col">
@@ -319,7 +319,6 @@ function Header() {
           </Popover.Panel>
         </Transition>
       </Popover>
-      <Outlet />
     </>
 
   )
