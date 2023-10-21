@@ -15,18 +15,27 @@ import {
   PuzzlePieceIcon,
 
 
-  CalendarIcon,
-  ChartPieIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
+  CubeTransparentIcon,
+  TableCellsIcon,
+  DocumentArrowUpIcon,
+  DocumentMagnifyingGlassIcon,
 
   PlusIcon,
   ArrowDownTrayIcon,
   BookmarkIcon,
   RectangleStackIcon,
-  Cog8ToothIcon
+  Cog8ToothIcon,
+  DocumentPlusIcon,
+  RectangleGroupIcon,
+  PhotoIcon,
+  DocumentIcon,
+  UserPlusIcon,
+  UserMinusIcon,
+  ChatBubbleLeftRightIcon,
+  PencilSquareIcon
+
+
+
 
 } from '@heroicons/react/24/outline'
 
@@ -93,7 +102,7 @@ const blogPosts = [
 
 const navigation = [
   {
-    name: 'Dashboard', href: '#', icon: HomeIcon, current: true,
+    name: 'Schema', href: '#', icon: CubeTransparentIcon, current: true,
     links: [
       { name: 'New Schema', value: 1, icon: PlusIcon },
       { name: 'Load Schema', value: 1, icon: ArrowDownTrayIcon },
@@ -102,11 +111,36 @@ const navigation = [
       { name: 'Properties', value: 1, icon: Cog8ToothIcon }
     ]
   },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  {
+    name: 'Table', href: '#', icon: TableCellsIcon, current: false,
+    links: [
+      { name: 'New Table', value: 1, icon: PlusIcon },
+      { name: 'Add Note', value: 1, icon: DocumentPlusIcon },
+      { name: 'Add Group', value: 1, icon: RectangleGroupIcon }
+    ]
+  },
+  {
+    name: 'Export', href: '#', icon: DocumentArrowUpIcon, current: false,
+    links: [
+      { name: 'SQL', value: 1, icon: CircleStackIcon },
+      { name: 'MySQL', value: 1, icon: CircleStackIcon },
+      { name: 'SQL Lite', value: 1, icon: CircleStackIcon },
+      { name: 'PostgreSQL', value: 1, icon: CircleStackIcon },
+      { name: 'Image', value: 1, icon: PhotoIcon },
+      { name: 'PDF', value: 1, icon: DocumentIcon }
+    ]
+  },
+  { name: 'Users', href: '#', icon: UserGroupIcon, current: false,
+  links: [
+    { name: 'Invite User', value: 1, icon: UserPlusIcon },
+    { name: 'Block User', value: 1, icon: UserMinusIcon },
+    { name: 'Send Message', value: 1, icon: ChatBubbleLeftRightIcon }
+  ] },
+  { name: 'Documentation', href: '#', icon: DocumentIcon, current: false,
+  links: [
+    { name: 'New', value: 1, icon: PencilSquareIcon },
+    
+  ] },
 ]
 const userNavigation = [
   { name: 'Your profile', href: '#' },
