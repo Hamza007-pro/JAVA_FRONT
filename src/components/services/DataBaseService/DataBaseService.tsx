@@ -1,5 +1,5 @@
-import { Fragment, useState } from 'react'
-import {  Menu, Transition } from '@headlessui/react'
+import { Fragment, useEffect, useState, useRef } from 'react'
+import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import {
     Bars3Icon,
@@ -9,15 +9,56 @@ import {
 import { userNavigation } from '../../../data/DummyData';
 import DataBaseServiceLayout from './DatabaseServiceLayout';
 import DataBaseServiceBody from './DataBaseServiceBody';
+
+import AlertModel from '../../common/AlertModel';
+import CreateProjectForm from '../../common/CreateProjectForm';
+
+//Project class
+import Project from '../../../helpers/classes/Project';
+import Schema from '../../../helpers/classes/Schema';
+
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
 function DataBaseService() {
-    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [createProState, setCreateProState] = useState(false)
+    const [createProject, setCreateProject] = useState(false);
+    const [ProjectInfo, setProjectInfo] = useState({
+        Project_Name: '',
+        Project_Description: ''
+    });
+    const [event, setEvent] = useState();
+
+
+    useEffect(() => {
+        setShowModal(true);
+    }, []);
+
+    let  project = new Project('null','null', undefined);
+    
+    if (createProject === true) {
+       project.Name = ProjectInfo.Project_Name;
+       project.Description = ProjectInfo.Project_Description
+    }
+
+    const handleMenuClick = (event:any)=>{
+        if(event == 'CreateSchema'){
+            if(createProject == false){
+                setShowModal(true);
+                setCreateProState(false);
+            }else{
+                let schema = new Schema();
+                project.Schema = schema;
+            }
+        }
+        console.log(project)
+    }
     return (
         <>
-            <DataBaseServiceLayout />
+            <DataBaseServiceLayout handleMenuClick={handleMenuClick}/>
             <div className="lg:pl-20 h-screen ">
                 <div className="top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
                     <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
@@ -30,7 +71,9 @@ function DataBaseService() {
 
                     <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
                         <div className="relative flex flex-1">
-
+                            <span className="text-base text-center my-auto font-medium text-gray-900 hover:text-gray-900 capitalize">
+                                {project?.Name}
+                            </span>
                         </div>
                         <div className="flex items-center gap-x-4 lg:gap-x-6">
                             <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
@@ -90,9 +133,15 @@ function DataBaseService() {
                 </div>
 
                 <main className='max-w-full h-[calc(100%-64px)]'>
-                    <DataBaseServiceBody/>
+                    <DataBaseServiceBody />
                 </main>
             </div>
+            {showModal && (
+                <AlertModel setCreateProState={setCreateProState} setShowModal={setShowModal}/>
+            )}
+            {createProState && (
+                <CreateProjectForm setCreateProject={setCreateProject} setProjectInfo={setProjectInfo} setShowModal={setShowModal}/>
+            )}
         </>
 
     )

@@ -8,8 +8,9 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
-function DataBaseServiceLayout() {
+function DataBaseServiceLayout(props: any) {
 
+    
     return (
         <div>
 
@@ -49,10 +50,11 @@ function DataBaseServiceLayout() {
                                                 {item.links?.map((link) => (
                                                     <Menu.Item key={link.value}>
                                                         {({ active }) => (
-                                                            <div className={classNames(
+                                                            <div 
+                                                            className={classNames(
                                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                 'flex w-full px-2'
-                                                            )}>
+                                                            )} onClick={()=>props.handleMenuClick(link.BtnEvent)}>
                                                                 <link.icon className="flex h-5 w-5 my-auto" aria-hidden="true" />
                                                                 <span className='px-4 py-2 text-sm cursor-pointer font-medium'>
                                                                     {link.name}

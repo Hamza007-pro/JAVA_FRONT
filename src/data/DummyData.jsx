@@ -104,43 +104,47 @@ const navigation = [
   {
     name: 'Schema', href: '#', icon: CubeTransparentIcon, current: true,
     links: [
-      { name: 'New Schema', value: 1, icon: PlusIcon },
-      { name: 'Load Schema', value: 1, icon: ArrowDownTrayIcon },
-      { name: 'Save Schema', value: 1, icon: BookmarkIcon },
-      { name: 'Template', value: 1, icon: RectangleStackIcon },
-      { name: 'Properties', value: 1, icon: Cog8ToothIcon }
+      { name: 'New Schema', value: 1, icon: PlusIcon, BtnEvent: 'CreateSchema' },
+      { name: 'Load Schema', value: 2, icon: ArrowDownTrayIcon, BtnEvent: 'LoadSchema' },
+      { name: 'Save Schema', value: 3, icon: BookmarkIcon, BtnEvent: 'SaveSchema' },
+      { name: 'Template', value: 4, icon: RectangleStackIcon, BtnEvent: 'Template' },
+      { name: 'Properties', value: 5, icon: Cog8ToothIcon, BtnEvent: 'Properties' }
     ]
   },
   {
     name: 'Table', href: '#', icon: TableCellsIcon, current: false,
     links: [
-      { name: 'New Table', value: 1, icon: PlusIcon },
-      { name: 'Add Note', value: 1, icon: DocumentPlusIcon },
-      { name: 'Add Group', value: 1, icon: RectangleGroupIcon }
+      { name: 'New Table', value: 1, icon: PlusIcon, BtnEvent: 'CreateSchema' },
+      { name: 'Add Note', value: 1, icon: DocumentPlusIcon, BtnEvent: 'CreateSchema' },
+      { name: 'Add Group', value: 1, icon: RectangleGroupIcon, BtnEvent: 'CreateSchema' }
     ]
   },
   {
     name: 'Export', href: '#', icon: DocumentArrowUpIcon, current: false,
     links: [
-      { name: 'SQL', value: 1, icon: CircleStackIcon },
-      { name: 'MySQL', value: 1, icon: CircleStackIcon },
-      { name: 'SQL Lite', value: 1, icon: CircleStackIcon },
-      { name: 'PostgreSQL', value: 1, icon: CircleStackIcon },
-      { name: 'Image', value: 1, icon: PhotoIcon },
-      { name: 'PDF', value: 1, icon: DocumentIcon }
+      { name: 'SQL', value: 1, icon: CircleStackIcon, BtnEvent: 'CreateSchema' },
+      { name: 'MySQL', value: 1, icon: CircleStackIcon, BtnEvent: 'CreateSchema' },
+      { name: 'SQL Lite', value: 1, icon: CircleStackIcon, BtnEvent: 'CreateSchema' },
+      { name: 'PostgreSQL', value: 1, icon: CircleStackIcon, BtnEvent: 'CreateSchema' },
+      { name: 'Image', value: 1, icon: PhotoIcon, BtnEvent: 'CreateSchema' },
+      { name: 'PDF', value: 1, icon: DocumentIcon, BtnEvent: 'CreateSchema' }
     ]
   },
-  { name: 'Users', href: '#', icon: UserGroupIcon, current: false,
-  links: [
-    { name: 'Invite User', value: 1, icon: UserPlusIcon },
-    { name: 'Block User', value: 1, icon: UserMinusIcon },
-    { name: 'Send Message', value: 1, icon: ChatBubbleLeftRightIcon }
-  ] },
-  { name: 'Documentation', href: '#', icon: DocumentIcon, current: false,
-  links: [
-    { name: 'New', value: 1, icon: PencilSquareIcon },
-    
-  ] },
+  {
+    name: 'Users', href: '#', icon: UserGroupIcon, current: false,
+    links: [
+      { name: 'Invite User', value: 1, icon: UserPlusIcon, BtnEvent: 'CreateSchema' },
+      { name: 'Block User', value: 1, icon: UserMinusIcon, BtnEvent: 'CreateSchema' },
+      { name: 'Send Message', value: 1, icon: ChatBubbleLeftRightIcon, BtnEvent: 'CreateSchema' }
+    ]
+  },
+  {
+    name: 'Documentation', href: '#', icon: DocumentIcon, current: false,
+    links: [
+      { name: 'New', value: 1, icon: PencilSquareIcon, BtnEvent: 'CreateSchema' },
+
+    ]
+  },
 ]
 const userNavigation = [
   { name: 'Your profile', href: '#' },
