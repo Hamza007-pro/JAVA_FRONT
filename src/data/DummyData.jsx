@@ -151,4 +151,27 @@ const userNavigation = [
   { name: 'Sign out', href: '#' },
 ]
 
-export { solutions, company, resources, blogPosts, navigation, userNavigation }
+// schema Tables Dummy Data
+
+const tablesData = [
+  {
+    id: 1, name: 'User',
+    attributes: [{ name: 'Id', type: 'Integer', size: 20 },
+    { name: 'Name', type: 'String', size: 20 },
+    { name: 'Age', type: 'Integer', size: 20 }]
+  },
+  {
+    id: 2, name: 'Category',
+    attributes: [{ name: 'Id', type: 'Integer', size: 20 },
+    { name: 'Name', type: 'String', size: 20 },
+    { name: 'Matricule', type: 'Integer', size: 50 }]
+  },
+  {
+    id: 3, name: 'Work',
+    attributes: [{ name: 'Id', type: 'Integer', size: 20 },
+    { name: 'Name', type: 'String', size: 20 },
+    { name: 'Local', type: 'String', size: 50 }]
+  }
+]
+
+export { solutions, company, resources, blogPosts, navigation, userNavigation,tablesData }

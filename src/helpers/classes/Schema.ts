@@ -1,4 +1,7 @@
+import Table from "./Table";
+
 class Schema {
-    Tables:any[] = []
+    Tables:Table[]=[]
+
 }
 export default Schema;

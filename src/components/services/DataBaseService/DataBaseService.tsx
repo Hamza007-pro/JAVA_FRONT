@@ -6,7 +6,7 @@ import {
     BellIcon,
 } from '@heroicons/react/24/outline'
 
-import { userNavigation } from '../../../data/DummyData';
+import { tablesData, userNavigation } from '../../../data/DummyData';
 import DataBaseServiceLayout from './DatabaseServiceLayout';
 import DataBaseServiceBody from './DataBaseServiceBody';
 
@@ -16,6 +16,8 @@ import CreateProjectForm from '../../common/CreateProjectForm';
 //Project class
 import Project from '../../../helpers/classes/Project';
 import Schema from '../../../helpers/classes/Schema';
+import Table from '../../../helpers/classes/Table';
+import Attribute from '../../../helpers/classes/Attribute';
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -30,14 +32,24 @@ function DataBaseService() {
         Project_Name: '',
         Project_Description: ''
     });
-    const [event, setEvent] = useState();
-
 
     useEffect(() => {
         setShowModal(true);
     }, []);
+    //declare default schema properties
 
-    let  project = new Project('null','null', undefined);
+    let schema = new Schema();
+    let attribute:Attribute;
+    tablesData.map((ref)=>{
+        let table = new Table(ref.id,ref.name);
+        ref.attributes.map((attr)=>{
+            attribute = new Attribute(attr.name,attr.type,attr.size);
+        });
+        table.Attributes.push(attribute);
+        schema.Tables.push(table);
+    })
+    let  project = new Project('','null',schema);
+    
     
     if (createProject === true) {
        project.Name = ProjectInfo.Project_Name;
@@ -50,7 +62,7 @@ function DataBaseService() {
                 setShowModal(true);
                 setCreateProState(false);
             }else{
-                let schema = new Schema();
+                
                 project.Schema = schema;
             }
         }
@@ -133,7 +145,7 @@ function DataBaseService() {
                 </div>
 
                 <main className='max-w-full h-[calc(100%-64px)]'>
-                    <DataBaseServiceBody />
+                    <DataBaseServiceBody schema={schema}/>
                 </main>
             </div>
             {showModal && (
