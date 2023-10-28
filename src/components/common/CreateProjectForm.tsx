@@ -11,16 +11,29 @@ function CreateProjectForm(props: any) {
         Project_Name: "",
         Project_Description: ""
     })
+    const[classState,setClassState]=useState(false);
 
     const onchangeInputHandle = (event:any)=>{
         setInputValues({
             ...inputValues,
            [event.target.name] : event.target.value
         })
+        if(inputValues.Project_Name == ""){
+            setClassState(true)
+        }else{
+            setClassState(false)
+        }
     }
 
     const onClickCreateHandle = ()=>{
-        props.setProjectInfo(inputValues)
+        if(inputValues.Project_Name == ""){
+            setClassState(true)
+        }else{
+            props.setProjectInfo(inputValues);
+            props.setCreateProject(true);
+            setOpen(false);
+            setClassState(false)
+        }
     }
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -66,10 +79,16 @@ function CreateProjectForm(props: any) {
                                                     type="text"
                                                     name="Project_Name"
                                                     id="Project-Name"
-                                                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 font-medium shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
+                                                    style={classState?{}:{borderColor:'green'}}
+                                                    className={`block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 font-medium shadow-sm ring-1 ring-inset ${classState?'ring-red-300':'ring-gray-300'} placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6`}
                                                     placeholder="Jane Smith"
                                                     onChange={onchangeInputHandle}
                                                 />
+                                                {
+                                                    classState?(<label htmlFor="comment" className="block text-xs font-medium text-red-900 text-left">
+                                                    Invalid project Name
+                                                </label>):(<span></span>)
+                                                }
                                             </div>
                                         </div>
                                         <div className="mt-10 px-2">
@@ -95,7 +114,7 @@ function CreateProjectForm(props: any) {
                                     <button
                                         type="button"
                                         className="inline-flex w-full justify-center rounded-md bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
-                                        onClick={() => { setOpen(false); props.setCreateProject(true); onClickCreateHandle() }}
+                                        onClick={() => {  onClickCreateHandle() }}
                                     >
                                         Create Project
                                     </button>
