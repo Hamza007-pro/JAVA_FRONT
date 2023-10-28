@@ -173,5 +173,14 @@ const tablesData = [
     { name: 'Local', type: 'String', size: 50 }]
   }
 ]
+const colors = [
+  '#e63f66', '#462173',
+  '#2c32d6', '#10becb',
+  '#0b3641', '#03302c',
+  '#10cb7a', '#01321f',
+  '#99cb10', '#dddd15',
+  '#3f2d09', '#7e5315',
+  '#ac4c11', '#421806',
+  '#ea1818', '#4a0505',]
 
-export { solutions, company, resources, blogPosts, navigation, userNavigation,tablesData }
+export { solutions, company, resources, blogPosts, navigation, userNavigation, tablesData,colors }

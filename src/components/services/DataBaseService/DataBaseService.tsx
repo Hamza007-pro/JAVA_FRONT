@@ -36,20 +36,19 @@ function DataBaseService() {
     useEffect(() => {
         setShowModal(true);
     }, []);
+    
     //declare default schema properties
 
     let schema = new Schema();
-    let attribute:Attribute;
     tablesData.map((ref)=>{
         let table = new Table(ref.id,ref.name);
         ref.attributes.map((attr)=>{
-            attribute = new Attribute(attr.name,attr.type,attr.size);
+            let attribute = new Attribute(attr.name,attr.type,attr.size);
+            table.Attributes.push(attribute);
         });
-        table.Attributes.push(attribute);
         schema.Tables.push(table);
     })
     let  project = new Project('','null',schema);
-    
     
     if (createProject === true) {
        project.Name = ProjectInfo.Project_Name;

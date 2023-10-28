@@ -1,8 +1,11 @@
-import { Fragment } from 'react'
+import { Fragment,useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisHorizontalIcon } from '@heroicons/react/20/solid'
 
-import Attribute from '../../helpers/classes/Attribute'
+import Attribute from '../../helpers/classes/Attribute';
+
+import EditeTable from './EditeTable';
+
 
 const statuses: any = {
     Paid: 'text-green-700 bg-green-50 ring-green-600/20',
@@ -16,7 +19,12 @@ function classNames(...classes: any) {
 }
 
 export default function TableDesigne(props: any) {
-    console.log(props.table.Attributes)
+
+    const [open, setOpen] = useState(false)
+    function editTable (){
+            setOpen(true)
+    }
+
     return (
         <div key={props.table.Id} className="overflow-hidden rounded-xl border border-gray-200 w-72 focus:z-50 focus:absolute">
             <div className="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
@@ -38,28 +46,28 @@ export default function TableDesigne(props: any) {
                         <Menu.Items className="absolute right-0 z-10 mt-0.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                             <Menu.Item>
                                 {({ active }) => (
-                                    <a
-                                        href="#"
+                                    <span
                                         className={classNames(
                                             active ? 'bg-gray-50' : '',
-                                            'block px-3 py-1 text-sm leading-6 text-gray-900'
+                                            'block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer'
                                         )}
                                     >
-                                        View<span className="sr-only">, user</span>
-                                    </a>
+                                        View
+                                    </span>
                                 )}
                             </Menu.Item>
                             <Menu.Item>
+
                                 {({ active }) => (
-                                    <a
-                                        href="#"
+                                    <span
                                         className={classNames(
                                             active ? 'bg-gray-50' : '',
-                                            'block px-3 py-1 text-sm leading-6 text-gray-900'
+                                            'block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer'
                                         )}
+                                        onClick={editTable}
                                     >
-                                        Edit<span className="sr-only">, user</span>
-                                    </a>
+                                        Edit
+                                    </span>
                                 )}
                             </Menu.Item>
                         </Menu.Items>
@@ -67,16 +75,15 @@ export default function TableDesigne(props: any) {
                 </Menu>
             </div>
             {
-                props.table.Attributes.map((attribute: Attribute) => (                    
-                    <dl className="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
+                props.table.Attributes.map((attribute: Attribute) =>(                    
+                    <dl className="-my-3 divide-y divide-gray-100 px-6 py-2 text-sm leading-6 bg-white">
                         <div className="flex justify-between gap-x-4 py-3">
                             <dt className="text-gray-500">{attribute.Name}</dt>
                             <dd className="flex items-start gap-x-2">
                                 <div className="font-medium text-gray-900">{attribute.Type}</div>
-                                <div className="font-medium text-gray-900">{attribute.Size}</div>
                                 <div
                                     className={classNames(
-                                        'Overdue',
+                                        statuses.Overdue,
                                         'rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset'
                                     )}
                                 >
@@ -87,7 +94,7 @@ export default function TableDesigne(props: any) {
                     </dl>
                 ))
             }
-               
+            {open && (<EditeTable open={open} setOpen={setOpen} targetTable={props.table}/>)}
         </div>
     )
 }
