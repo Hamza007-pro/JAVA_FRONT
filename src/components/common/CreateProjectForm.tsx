@@ -80,12 +80,13 @@ function CreateProjectForm(props: any) {
                                                     name="Project_Name"
                                                     id="Project-Name"
                                                     style={classState?{}:{borderColor:'green'}}
-                                                    className={`block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 font-medium shadow-sm ring-1 ring-inset ${classState?'ring-red-300':'ring-gray-300'} placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6`}
+                                                    className={`block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 font-medium shadow-sm ring-1 ring-inset ${classState?'ring-red-300 focus:ring-red-400':'ring-gray-300 focus:ring-gray-400'} placeholder:text-gray-400 focus:ring-1 focus:ring-inset  sm:text-sm sm:leading-6`}
                                                     placeholder="Jane Smith"
                                                     onChange={onchangeInputHandle}
+                                                    onKeyUp={onchangeInputHandle}
                                                 />
                                                 {
-                                                    classState?(<label htmlFor="comment" className="block text-xs font-medium text-red-900 text-left">
+                                                    classState?(<label htmlFor="comment" className="block text-xs font-medium text-red-900 text-left absolute pt-2 ">
                                                     Invalid project Name
                                                 </label>):(<span></span>)
                                                 }

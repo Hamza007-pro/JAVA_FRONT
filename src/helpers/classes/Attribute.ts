@@ -2,7 +2,7 @@ class Attribute{
     Name: string;
     Type:string;
     Size:number;
-    Constraints:any[]=[];
+    Constraints:Object[]=[];
 
     constructor(name:string, type:string, size:number){
         this.Name = name;

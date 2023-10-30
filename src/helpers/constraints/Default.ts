@@ -4,8 +4,8 @@ export default class Default implements Constraints{
     name: string;
     value:any;
 
-    constructor(name:string, value:any){
-        this.name = name;
+    constructor(value:any){
+        this.name = 'Default';
         this.value = value;
     }
 }

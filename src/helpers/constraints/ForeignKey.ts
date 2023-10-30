@@ -5,8 +5,8 @@ export default class ForeignKey implements Constraints{
     targetTable:string;
     targetAttribute:string;
 
-    constructor (name:string,targetTable:string, targetAttribute:string){
-        this.name = name;
+    constructor (targetTable:string, targetAttribute:string){
+        this.name = 'ForeignKey';
         this.targetTable = targetTable;
         this.targetAttribute = targetAttribute;
     }

@@ -5,8 +5,8 @@ export default class Check implements Constraints{
     value:any;
     operation:string;
 
-    constructor(name:string, value:any, operation:string){
-        this.name = name;
+    constructor(value:any, operation:string){
+        this.name = 'Check';
         this.value = value;
         this.operation = operation;
     }

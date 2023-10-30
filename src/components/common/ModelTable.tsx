@@ -4,11 +4,9 @@ import { Menu, Transition } from '@headlessui/react'
 import SideOverlayEdit from './SideOverLayEdit';
 
 import { colors } from '../../data/DummyData';
-import { CheckCircleIcon } from '@heroicons/react/20/solid'
+import { CheckCircleIcon,KeyIcon } from '@heroicons/react/20/solid'
 
-function classNames(...classes: any) {
-    return classes.filter(Boolean).join(' ')
-}
+
 
 export default function ModelTable(props: any) {
     const [tableName, setTableName] = useState(props.tableTarget.Name);
@@ -17,7 +15,6 @@ export default function ModelTable(props: any) {
     const [open, setOpen] = useState(false);
     const [targetAttribute, setTargetAttribute] = useState();
 
-    console.log(targetAttribute)
     const updateTableName = (event: any) => {
         setTableName(event.target.value);
     }
@@ -109,8 +106,17 @@ export default function ModelTable(props: any) {
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                             Status
                                         </th>
-                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 text-center">
                                             Constraints
+                                            <div className='grid grid-cols-7 text-center'>
+                                                <span className='text-center pt-2'>Primary Key</span>
+                                                <span className='text-center pt-2'>Foriegn Key</span>
+                                                <span className='text-center pt-2'>Auto Increment</span>
+                                                <span className='text-center pt-2'>Not Null</span>
+                                                <span className='text-center pt-2'>Unique</span>
+                                                <span className='text-center pt-2'>Check</span>
+                                                <span className='text-center pt-2'>Default</span>
+                                            </div>
                                         </th>
                                         <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
                                             <span className="sr-only">Edit</span>
@@ -118,7 +124,7 @@ export default function ModelTable(props: any) {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                    {props.tableTarget.Attributes.map((attribute: any) => (
+                                    {props.tableTarget.Attributes.map((attribute:any) => (
                                         <tr key={attribute.Name}>
                                             <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                                                 <div className="flex items-center">
@@ -131,53 +137,86 @@ export default function ModelTable(props: any) {
                                                 <div className="text-gray-900">{attribute.Type}</div>
                                             </td>
                                             <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                                                <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                                                    Active
+                                                <span className="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium">
+                                                    <KeyIcon  className="flex h-5 w-5 my-auto text-yellow-400"/>
+                                                    <KeyIcon  className="flex h-5 w-5 my-auto text-grey-400"/>
                                                 </span>
                                             </td>
-                                            <td className='grid grid-cols-5 '>
-                                                <div className="flex h-6 items-center">
+                                            <td className='grid grid-cols-7 whitespace-nowrap px-3 py-5 text-sm text-gray-500'>
+                                                <div className="flex h-6 items-center mx-auto">
                                                     <input
-                                                        id="candidates"
-                                                        aria-describedby="candidates-description"
-                                                        name="candidates"
+                                                        id="PrimaryKey"
+                                                        aria-describedby="PrimaryKey"
+                                                        name="PrimaryKey"
                                                         type="checkbox"
+                                                        disabled={true}
+                                                        value={'PK'}
                                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                 </div>
-                                                <div className="flex h-6 items-center">
+                                                <div className="flex h-6 items-center mx-auto">
                                                     <input
-                                                        id="candidates"
-                                                        aria-describedby="candidates-description"
-                                                        name="candidates"
+                                                        id="ForeignKey"
+                                                        aria-describedby="ForeignKey"
+                                                        name="ForeignKey"
                                                         type="checkbox"
+                                                        disabled={true}
+                                                        value={'FK'}
                                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                 </div>
-                                                <div className="flex h-6 items-center">
+                                                <div className="flex h-6 items-center mx-auto">
                                                     <input
-                                                        id="candidates"
-                                                        aria-describedby="candidates-description"
-                                                        name="candidates"
+                                                        id="AutoIncrement"
+                                                        aria-describedby="AutoIncrement"
+                                                        name="AutoIncrement"
                                                         type="checkbox"
+                                                        disabled={true}
+                                                        value={'AI'}
                                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                 </div>
-                                                <div className="flex h-6 items-center">
+                                                <div className="flex h-6 items-center mx-auto">
                                                     <input
-                                                        id="candidates"
-                                                        aria-describedby="candidates-description"
-                                                        name="candidates"
+                                                        id="NotNull"
+                                                        aria-describedby="NotNull"
+                                                        name="NotNull"
                                                         type="checkbox"
+                                                        disabled={true}
+                                                        value={'NN'}
                                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                 </div>
-                                                <div className="flex h-6 items-center">
+                                                <div className="flex h-6 items-center mx-auto">
                                                     <input
-                                                        id="candidates"
-                                                        aria-describedby="candidates-description"
-                                                        name="candidates"
+                                                        id="Unique"
+                                                        aria-describedby="Unique"
+                                                        name="Unique"
                                                         type="checkbox"
+                                                        disabled={true}
+                                                        value={'U'}
+                                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                    />
+                                                </div>
+                                                <div className="flex h-6 items-center mx-auto">
+                                                    <input
+                                                        id="Check"
+                                                        aria-describedby="Check"
+                                                        name="Check"
+                                                        type="checkbox"
+                                                        disabled={true}
+                                                        value={'C'}
+                                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                    />
+                                                </div>
+                                                <div className="flex h-6 items-center mx-auto">
+                                                    <input
+                                                        id="Default"
+                                                        aria-describedby="Default"
+                                                        name="Default"
+                                                        type="checkbox"
+                                                        disabled={true}
+                                                        value={'D'}
                                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                 </div>

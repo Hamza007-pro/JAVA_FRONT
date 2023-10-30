@@ -156,21 +156,21 @@ const userNavigation = [
 const tablesData = [
   {
     id: 1, name: 'User',
-    attributes: [{ name: 'Id', type: 'Integer', size: 20 },
-    { name: 'Name', type: 'String', size: 20 },
-    { name: 'Age', type: 'Integer', size: 20 }]
+    attributes: [{ name: 'Id', type: 'Integer', size: 20,constraints:[] },
+    { name: 'Name', type: 'String', size: 20,constraints:[] },
+    { name: 'Age', type: 'Integer', size: 20,constraints:[] }]
   },
   {
     id: 2, name: 'Category',
-    attributes: [{ name: 'Id', type: 'Integer', size: 20 },
-    { name: 'Name', type: 'String', size: 20 },
-    { name: 'Matricule', type: 'Integer', size: 50 }]
+    attributes: [{ name: 'Id', type: 'Integer', size: 20,constraints:[] },
+    { name: 'Name', type: 'String', size: 20,constraints:[] },
+    { name: 'Matricule', type: 'Integer', size: 50,constraints:[] }]
   },
   {
     id: 3, name: 'Work',
-    attributes: [{ name: 'Id', type: 'Integer', size: 20 },
-    { name: 'Name', type: 'String', size: 20 },
-    { name: 'Local', type: 'String', size: 50 }]
+    attributes: [{ name: 'Id', type: 'Integer', size: 20,constraints:[] },
+    { name: 'Name', type: 'String', size: 20,constraints:[] },
+    { name: 'Local', type: 'String', size: 50,constraints:[] }]
   }
 ]
 const colors = [

@@ -18,6 +18,8 @@ import Project from '../../../helpers/classes/Project';
 import Schema from '../../../helpers/classes/Schema';
 import Table from '../../../helpers/classes/Table';
 import Attribute from '../../../helpers/classes/Attribute';
+import PrimaryKey from '../../../helpers/constraints/PrimaryKey';
+import Unique from '../../../helpers/constraints/Unique';
 
 
 function classNames(...classes: any) {
@@ -45,7 +47,11 @@ function DataBaseService() {
         let table = new Table(ref.id,ref.name);
         ref.attributes.map((attr)=>{
             let attribute = new Attribute(attr.name,attr.type,attr.size);
+            let primaryKey = new PrimaryKey();
+            let unique = new Unique();
+            attribute.Constraints.push(primaryKey,unique);
             table.Attributes.push(attribute);
+            
         });
         schema.Tables.push(table);
     })
