@@ -1,9 +1,11 @@
-import { Fragment } from 'react'
+import { Fragment,useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import ModelTable from './ModelTable'
 
 
 export default function EditeTable(props: any) {
+
+  
 
   return (
     <Transition.Root show={props.open} as={Fragment}>
