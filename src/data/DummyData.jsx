@@ -173,6 +173,7 @@ const tablesData = [
     { name: 'Local', type: 'String', size: 50,constraints:[] }]
   }
 ]
+const constraints = ['Primary Key','Unique','Auto Increment','Not Null','Default','Check','Foreign Key',];
 const colors = [
   '#e63f66', '#462173',
   '#2c32d6', '#10becb',
@@ -183,4 +184,4 @@ const colors = [
   '#ac4c11', '#421806',
   '#ea1818', '#4a0505',]
 
-export { solutions, company, resources, blogPosts, navigation, userNavigation, tablesData,colors }
+export { solutions, company, resources, blogPosts, navigation, userNavigation, tablesData,colors,constraints }
