@@ -1,26 +1,21 @@
 import { Fragment, useState, useEffect } from 'react'
-import { Dialog, Transition, Switch } from '@headlessui/react'
+import { Dialog, Transition, Menu } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 
-import { constraints } from '../../data/DummyData'
+
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 export default function SideOverlayEdit(props: any) {
     const [classState, setClassState] = useState(false);
     const [AttributeName, setAttributeName] = useState();
-    const [enabled, setEnabled] = useState([
-        { name: 'Primary Key', state: false },
-        { name: 'Unique', state: false },
-        { name: 'Auto Increment', state: false },
-        { name: 'Not Null', state: false },
-        { name: 'Default', state: false },
-        { name: 'Check', state: false },
-        { name: 'Foreign Key', state: false }])
-
+    const [constraints,setConstraints] = useState(props.attribute.Constraints);
     useEffect(() => {
         setAttributeName(props.attribute.Name);
+        setConstraints(props.attribute.Constraints);
     })
+
     const updateAttributeName = (event: any) => {
         setAttributeName(event.target.value);
     }
@@ -34,12 +29,16 @@ export default function SideOverlayEdit(props: any) {
     }
 
     const saveAttributeModifications = () => {
-       
+
     }
-    const onChangeConstraintState = (name:string) => {
-        setEnabled((prevState)=>
-                prevState.map((conSwitch) => conSwitch.name === name?{...conSwitch,state:!conSwitch.state}:conSwitch)
-            )
+    const onDeleteConstraint = (name: string) => {
+        props.attribute.Constraints.splice(
+            props.attribute.Constraints.findIndex((item:any) => item.name === name),1
+        )
+        const updatedArray = constraints.filter((item:any) => item.name !== name);
+        setConstraints(updatedArray);
+
+        console.log(props.attribute);
     }
     return (
         <Transition.Root show={props.slideOverlayState} as={Fragment}>
@@ -111,61 +110,48 @@ export default function SideOverlayEdit(props: any) {
                                                     </div>
                                                 </div>
                                                 <div className='pt-4 px-8'>
-                                                    {
-                                                        enabled.map((constraint) => (
-                                                            <Switch.Group key={constraint.name} as="div" className="flex items-center justify-between py-4">
-                                                                <span className="flex flex-grow flex-col">
-                                                                    <Switch.Label as="span" className="text-md font-medium leading-6 text-gray-900" passive>
-                                                                        {constraint.name}
-                                                                    </Switch.Label>
-                                                                </span>
-                                                                <Switch
-                                                                    checked={constraint.state}
-                                                                    onChange={()=>onChangeConstraintState(constraint.name)}
-                                                                    className={classNames(
-                                                                        constraint.state ? 'bg-indigo-600' : 'bg-gray-200',
-                                                                        'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2'
-                                                                    )}
-                                                                >
-                                                                    <span
-                                                                        className={classNames(
-                                                                            constraint.state ? 'translate-x-5' : 'translate-x-0',
-                                                                            'pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out'
-                                                                        )}
-                                                                    >
-                                                                        <span
-                                                                            className={classNames(
-                                                                                constraint.state ? 'opacity-0 duration-100 ease-out' : 'opacity-100 duration-200 ease-in',
-                                                                                'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity'
-                                                                            )}
-                                                                            aria-hidden="true"
+                                                    <ul role="list" className="divide-y divide-gray-100">
+                                                        {constraints.map((constraint: any) => (
+                                                            <li key={constraint.name} className="flex cursor-pointer items-center justify-between gap-x-6 py-5">
+                                                                <div className="min-w-0">
+                                                                    <div className="flex items-start gap-x-3">
+                                                                        <p className="text-sm font-semibold leading-6 text-gray-900">{constraint.name}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex flex-none items-center gap-x-4">
+                                                                    <Menu as="div" className="relative flex-none">
+                                                                        <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
+                                                                            <span className="sr-only">Open options</span>
+                                                                            <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
+                                                                        </Menu.Button>
+                                                                        <Transition
+                                                                            as={Fragment}
+                                                                            enter="transition ease-out duration-100"
+                                                                            enterFrom="transform opacity-0 scale-95"
+                                                                            enterTo="transform opacity-100 scale-100"
+                                                                            leave="transition ease-in duration-75"
+                                                                            leaveFrom="transform opacity-100 scale-100"
+                                                                            leaveTo="transform opacity-0 scale-95"
                                                                         >
-                                                                            <svg className="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
-                                                                                <path
-                                                                                    d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
-                                                                                    stroke="currentColor"
-                                                                                    strokeWidth={2}
-                                                                                    strokeLinecap="round"
-                                                                                    strokeLinejoin="round"
-                                                                                />
-                                                                            </svg>
-                                                                        </span>
-                                                                        <span
-                                                                            className={classNames(
-                                                                                constraint.state ? 'opacity-100 duration-200 ease-in' : 'opacity-0 duration-100 ease-out',
-                                                                                'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity'
-                                                                            )}
-                                                                            aria-hidden="true"
-                                                                        >
-                                                                            <svg className="h-3 w-3 text-indigo-600" fill="currentColor" viewBox="0 0 12 12">
-                                                                                <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
-                                                                            </svg>
-                                                                        </span>
-                                                                    </span>
-                                                                </Switch>
-                                                            </Switch.Group>
-                                                        ))
-                                                    }
+                                                                            <Menu.Items className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+                                                                                
+                                                                                <Menu.Item>
+                                                                                    {({ active }) => (
+                                                                                        <span className={classNames(
+                                                                                            active ? 'bg-gray-50' : '',
+                                                                                            'block cursor-pointer px-3 py-1 text-sm leading-6 text-gray-900'
+                                                                                        )}
+                                                                                        onClick={()=>onDeleteConstraint(constraint.name)}
+                                                                                        >Delete</span>
+                                                                                    )}
+                                                                                </Menu.Item>
+                                                                            </Menu.Items>
+                                                                        </Transition>
+                                                                    </Menu>
+                                                                </div>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>

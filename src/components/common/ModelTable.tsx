@@ -14,6 +14,7 @@ export default function ModelTable(props: any) {
     const [classState, setClassState] = useState(false);
     const [open, setOpen] = useState(false);
     const [targetAttribute, setTargetAttribute] = useState();
+    
 
     const updateTableName = (event: any) => {
         setTableName(event.target.value);
@@ -151,6 +152,7 @@ export default function ModelTable(props: any) {
                                                         type="checkbox"
                                                         disabled={true}
                                                         value={'PK'}
+                                                        checked={true}
                                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                                     />
                                                 </div>

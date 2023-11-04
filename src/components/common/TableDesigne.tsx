@@ -1,4 +1,4 @@
-import { Fragment,useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisHorizontalIcon } from '@heroicons/react/20/solid'
 
@@ -21,8 +21,8 @@ function classNames(...classes: any) {
 export default function TableDesigne(props: any) {
 
     const [open, setOpen] = useState(false)
-    function editTable (){
-            setOpen(true)
+    function editTable() {
+        setOpen(true)
     }
 
     return (
@@ -75,7 +75,7 @@ export default function TableDesigne(props: any) {
                 </Menu>
             </div>
             {
-                props.table.Attributes.map((attribute: Attribute) =>(                    
+                props.table.Attributes.map((attribute: Attribute) => (
                     <dl className="-my-3 divide-y divide-gray-100 px-6 py-2 text-sm leading-6 bg-white">
                         <div className="flex justify-between gap-x-4 py-3">
                             <dt className="text-gray-500">{attribute.Name}</dt>
@@ -94,7 +94,8 @@ export default function TableDesigne(props: any) {
                     </dl>
                 ))
             }
-            {open && (<EditeTable open={open} setOpen={setOpen} targetTable={props.table}/>)}
+            {open && (<EditeTable open={open} setOpen={setOpen} targetTable={props.table} />)}
+           
         </div>
     )
 }

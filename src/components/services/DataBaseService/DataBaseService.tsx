@@ -20,6 +20,7 @@ import Table from '../../../helpers/classes/Table';
 import Attribute from '../../../helpers/classes/Attribute';
 import PrimaryKey from '../../../helpers/constraints/PrimaryKey';
 import Unique from '../../../helpers/constraints/Unique';
+import Default from '../../../helpers/constraints/Default';
 
 
 function classNames(...classes: any) {
@@ -49,7 +50,8 @@ function DataBaseService() {
             let attribute = new Attribute(attr.name,attr.type,attr.size);
             let primaryKey = new PrimaryKey();
             let unique = new Unique();
-            attribute.Constraints.push(primaryKey,unique);
+            let defaultc = new Default('20');
+            attribute.Constraints.push(primaryKey,unique,defaultc);
             table.Attributes.push(attribute);
             
         });
