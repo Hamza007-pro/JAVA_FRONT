@@ -12,10 +12,9 @@ export default function SideOverlayEdit(props: any) {
     const [AttributeName, setAttributeName] = useState();
     const [constraints,setConstraints] = useState(props.attribute.Constraints);
     useEffect(() => {
-        setAttributeName(props.attribute.Name);
         setConstraints(props.attribute.Constraints);
-    })
-
+        setAttributeName(props.attribute.Name)
+    },[props.attribute.Constraints])
     const updateAttributeName = (event: any) => {
         setAttributeName(event.target.value);
     }
@@ -29,7 +28,8 @@ export default function SideOverlayEdit(props: any) {
     }
 
     const saveAttributeModifications = () => {
-
+        props.attribute.Name = AttributeName;
+        props.setState(false)
     }
     const onDeleteConstraint = (name: string) => {
         props.attribute.Constraints.splice(
