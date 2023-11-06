@@ -114,7 +114,7 @@ const navigation = [
   {
     name: 'Table', href: '#', icon: TableCellsIcon, current: false,
     links: [
-      { name: 'New Table', value: 1, icon: PlusIcon, BtnEvent: 'CreateSchema' },
+      { name: 'New Table', value: 1, icon: PlusIcon, BtnEvent: 'CreateTable' },
       { name: 'Add Note', value: 1, icon: DocumentPlusIcon, BtnEvent: 'CreateSchema' },
       { name: 'Add Group', value: 1, icon: RectangleGroupIcon, BtnEvent: 'CreateSchema' }
     ]

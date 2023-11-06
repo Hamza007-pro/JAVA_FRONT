@@ -36,50 +36,67 @@ function DataBaseService() {
         Project_Name: '',
         Project_Description: ''
     });
-
+    let TabCounter = 0;
     useEffect(() => {
         setShowModal(true);
     }, []);
-    
+
     //declare default schema properties
 
-    let schema = new Schema();
-    tablesData.map((ref)=>{
+    let Myschema = new Schema();
+    tablesData.map((ref) => {
         let table = new Table(ref.id,ref.name);
-        ref.attributes.map((attr)=>{
-            let attribute = new Attribute(attr.name,attr.type,attr.size);
+        ref.attributes.map((attr) => {
+            let attribute = new Attribute(attr.name, attr.type, attr.size);
             let primaryKey = new PrimaryKey();
             let unique = new Unique();
             let defaultc = new Default('20');
-            attribute.Constraints.push(primaryKey,unique,defaultc);
+            attribute.Constraints.push(primaryKey, unique, defaultc);
             table.Attributes.push(attribute);
-            
-        });
-        schema.Tables.push(table);
-    })
-    let  project = new Project('','null',schema);
-    
-    if (createProject === true) {
-       project.Name = ProjectInfo.Project_Name;
-       project.Description = ProjectInfo.Project_Description
-    }
 
-    const handleMenuClick = (event:any)=>{
-        if(event == 'CreateSchema'){
-            if(createProject == false){
-                setShowModal(true);
-                setCreateProState(false);
-            }else{
-                
-                project.Schema = schema;
+        });
+        Myschema.Tables.push(table);
+    })
+
+    const[schema,setSchema]=useState(Myschema)
+    let Myproject = new Project('', 'null', schema);
+    const[project,setProject]=useState(Myproject);
+
+    if (createProject === true) {
+        project.Name = ProjectInfo.Project_Name;
+        project.Description = ProjectInfo.Project_Description
+
+    }
+    
+    const handleMenuClick = (event: any) => {
+        
+        if (createProject === false) {
+            setShowModal(true);
+            setCreateProState(false);
+        }else{
+            switch (event) {
+                case 'CreateSchema':
+                    project.Schema = new Schema();
+                    Myproject.Schema=new Schema();
+                    setSchema(new Schema());
+                    TabCounter = 0;
+                    break;
+                case 'CreateTable' : 
+                    TabCounter = project.Schema.Tables.length+1;
+                    let table = new Table(TabCounter,'here');
+                    let attribute = new Attribute('Id','Integer',20);
+                    table.Attributes.push(attribute);
+                    schema.Tables.push(table);
+                    console.log(table)
+                break;
             }
         }
-        console.log(project)
+        setProject(Myproject)
     }
     return (
         <>
-            
-            <DataBaseServiceLayout handleMenuClick={handleMenuClick}/>
+
+            <DataBaseServiceLayout handleMenuClick={handleMenuClick} />
             <div className="lg:pl-20 h-screen ">
                 <div className="top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
                     <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
@@ -154,14 +171,14 @@ function DataBaseService() {
                 </div>
 
                 <main className='max-w-full h-[calc(100%-64px)]'>
-                    <DataBaseServiceBody schema={schema}/>
+                    <DataBaseServiceBody project={project} />
                 </main>
             </div>
             {showModal && (
-                <AlertModel setCreateProState={setCreateProState} setShowModal={setShowModal}/>
+                <AlertModel setCreateProState={setCreateProState} setShowModal={setShowModal} />
             )}
             {createProState && (
-                <CreateProjectForm setCreateProject={setCreateProject} setProjectInfo={setProjectInfo} setShowModal={setShowModal}/>
+                <CreateProjectForm setCreateProject={setCreateProject} setProjectInfo={setProjectInfo} setShowModal={setShowModal} />
             )}
         </>
 

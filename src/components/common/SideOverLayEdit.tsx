@@ -11,10 +11,12 @@ export default function SideOverlayEdit(props: any) {
     const [classState, setClassState] = useState(false);
     const [AttributeName, setAttributeName] = useState();
     const [constraints,setConstraints] = useState(props.attribute.Constraints);
+    
     useEffect(() => {
         setConstraints(props.attribute.Constraints);
         setAttributeName(props.attribute.Name)
     },[props.attribute.Constraints])
+    
     const updateAttributeName = (event: any) => {
         setAttributeName(event.target.value);
     }

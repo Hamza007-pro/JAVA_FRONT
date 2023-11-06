@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 
 
-import { navigation, userNavigation } from '../../../data/DummyData';
+import { navigation } from '../../../data/DummyData';
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
