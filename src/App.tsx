@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import './App.css';
@@ -40,7 +39,7 @@ function App() {
         <Route path='home' element={<Index/>}/>
         <Route path='rooms' element={<Room rooms={rooms}/>}/>
         <Route path="/rooms/:roomId" element = {<SingleRoom rooms={rooms} />}/>
-        <Route path='page' element={<ReservationsPage rooms={rooms}/>}/>
+        <Route path='reservations' element={<ReservationsPage rooms={rooms}/>}/>
       </Routes>
     </BrowserRouter>
   );
