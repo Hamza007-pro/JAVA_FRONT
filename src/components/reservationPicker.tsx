@@ -1,11 +1,12 @@
 import Button from "../common/button"
 import DatePicker from "../common/datePicker"
+import NumberPicker from "../common/numberPicker"
 
 const stats = [
     { id: 1, name: 'Check In',component:<DatePicker/>},
     { id: 2, name: 'Check Out',component:<DatePicker/>},
-    { id: 3, name: 'Room',component:<DatePicker/>},
-    { id: 4, name: 'Guests',component:<DatePicker/>},
+    { id: 3, name: 'Room',component:<NumberPicker/>},
+    { id: 4, name: 'Guests',component:<NumberPicker/>},
     { id: 5, name: '',component:<Button text={'Search Room'}/>},
   ]
   
