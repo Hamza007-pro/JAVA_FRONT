@@ -64,7 +64,7 @@ const RoomDetail: React.FC<RoomDetailProps> = ({ rooms }) => {
         </div>
       </div>
       <div className="w-1/4 p-8 mt-16">
-        <Reservation title  = {"Resevation"} button = {"Book Now"} />
+        <Reservation title  = {"Reservation"} button = {"Book Now"} />
       </div>
     </div>
   );

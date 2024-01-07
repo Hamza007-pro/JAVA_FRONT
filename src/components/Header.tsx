@@ -1,14 +1,6 @@
 import Nav from '../common/nav'
 import ReservationPicker from './reservationPicker'
 
-const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'Rooms', href: '#' },
-  { name: 'Reservation', href: '#' },
-  { name: 'Contact', href: '#' },
-  { name: 'Blog', href: '#' },
-]
-
 export default function Header() {
 
   return (
